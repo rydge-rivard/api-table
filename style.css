@@ -22,7 +22,9 @@ table {
   }
   
   th {
-    background-color: rgb(235,235,235);
+    background-color: #00A86B;
+    font-weight: 900;
+    color: #ffffff;
   }
   
   td {
