@@ -137,6 +137,9 @@ function filterOnPlantWeek () {
     }
 };
 
+const productCustomCodeSelect = document.querySelector('#product-custom-code');
+productCustomCodeSelect.addEventListener('change', () => filterOnProductCustomCode());
+
 const pCustomCodeOptions = [];
 function addPCustomCodeOptions () {
     const productCustomCodeSelect = document.querySelector('#product-custom-code');
@@ -149,4 +152,20 @@ function addPCustomCodeOptions () {
     uniquePCustomCodeOptions.forEach(option => {
         createSelectOptions(productCustomCodeSelect, option);
     });
+};
+
+function filterOnProductCustomCode () {
+    const tr = table.querySelectorAll('tr');
+    for (let i = 0; i < tr.length; i++) {
+        const td = tr[i].querySelector('.p-custom-code');
+        if (productCustomCodeSelect.value === 'all') {
+            tr[i].style.display = "";
+            console.log(`All rows have been selected.`)
+        } else if (td.textContent === productCustomCodeSelect.value) {
+            tr[i].style.display = "";
+            console.log(`Rows with ${td.textContent} have been selected.`)
+        } else {
+            tr[i].style.display = "none";
+        }
+    }
 };
