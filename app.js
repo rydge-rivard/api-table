@@ -28,7 +28,6 @@ async function loadIntoTable(url, table) {
                 tableHead.appendChild(headerElement);
             }
         } else {
-            const objKeyPair = dataArrayFlat[0][1][key];
             const headerElement = document.createElement('th');
             headerElement.textContent = [key];
             tableHead.appendChild(headerElement);
@@ -42,6 +41,14 @@ async function loadIntoTable(url, table) {
         for (const key in dataArrayFlat[i][j]) {
             if (typeof dataArrayFlat[i][j][key] === 'object') {
                 for (const nestedKey in dataArrayFlat[i][j][key]) {
+                    if (typeof dataArrayFlat[i][j][key][nestedKey] === 'object') {
+                        for (const doubleNestedKey in dataArrayFlat[i][j][key][nestedKey]) {
+                            const objKeyPair = dataArrayFlat[i][j][key][nestedKey][doubleNestedKey];
+                            const cellElement = document.createElement('td');
+                            cellElement.textContent = objKeyPair;
+                            rowElement.appendChild(cellElement);
+                        }
+                    }
                     const objKeyPair = dataArrayFlat[i][j][key][nestedKey];
                     const cellElement = document.createElement('td');
                     cellElement.textContent = objKeyPair;
