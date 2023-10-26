@@ -96,9 +96,7 @@ function getSelectorOptions (cssClass, selectElement) {
         optionsArray.push(td.textContent);
     }
     let uniqueArray = optionsArray.filter((item, i, ar) => ar.indexOf(item) === i);
-    uniqueArray.forEach(option => {
-        createSelectOptions(selectElement, option);
-    });
+    uniqueArray.forEach(option => (createSelectOptions(selectElement, option)));
 };
 
 function createSelectOptions (selectElement, option) {
