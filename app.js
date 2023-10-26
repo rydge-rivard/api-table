@@ -68,8 +68,8 @@ async function loadIntoTable(url, table) {
             tableBody.appendChild(rowElement);
         }
     }
-    addPlantWeekOptions ();
-    addPCustomCodeOptions ();
+    getSelectorOptions ('.p-custom-code', productCustomCodeSelect, pCustomCodeOptions);
+    getSelectorOptions ('.plant-week', plantWeekSelect, plantWeekOptions);
 };
 
 const table = document.querySelector('table');
@@ -80,29 +80,6 @@ const locationSelect = document.querySelector('#location');
 locationSelect.addEventListener('change', () => filterSelectors
 ('.location', plantWeekSelect));
 
-//location selector options were created manually as an initial test of filtering
-//will update to dynamic function once the rest of logic is completed
-
-const plantWeekOptions = [];
-function addPlantWeekOptions () {
-    const plantWeekSelect = document.querySelector('#planned-plant-week');
-    const tr = table.querySelectorAll('tr');
-    for (let i = 0; i < tr.length; i++) {
-        const td = tr[i].querySelector('.plant-week');
-        plantWeekOptions.push(td.textContent);
-    }
-    let uniquePlantWeekOptions = plantWeekOptions.filter((item, i, ar) => ar.indexOf(item) === i);
-    uniquePlantWeekOptions.forEach(option => {
-        createSelectOptions(plantWeekSelect, option);
-    });
-};
-
-function createSelectOptions (selectElement, option) {
-    const optionElement = document.createElement('option');
-    optionElement.textContent = option;
-    selectElement.appendChild(optionElement);
-};
-
 const plantWeekSelect = document.querySelector('#planned-plant-week');
 plantWeekSelect.addEventListener('change', () => filterSelectors
 ('.plant-week', plantWeekSelect));
@@ -111,18 +88,22 @@ const productCustomCodeSelect = document.querySelector('#product-custom-code');
 productCustomCodeSelect.addEventListener('change', () => filterSelectors
 ('.p-custom-code', productCustomCodeSelect));
 
-const pCustomCodeOptions = [];
-function addPCustomCodeOptions () {
-    const productCustomCodeSelect = document.querySelector('#product-custom-code');
+function getSelectorOptions (cssClass, selectElement, optionsArray) {
     const tr = table.querySelectorAll('tr');
     for (let i = 0; i < tr.length; i++) {
-        const td = tr[i].querySelector('.p-custom-code');
-        pCustomCodeOptions.push(td.textContent);
+        const td = tr[i].querySelector(cssClass);
+        optionsArray.push(td.textContent);
     }
-    let uniquePCustomCodeOptions = pCustomCodeOptions.filter((item, i, ar) => ar.indexOf(item) === i);
-    uniquePCustomCodeOptions.forEach(option => {
-        createSelectOptions(productCustomCodeSelect, option);
+    let uniqueArray = optionsArray.filter((item, i, ar) => ar.indexOf(item) === i);
+    uniqueArray.forEach(option => {
+        createSelectOptions(selectElement, option);
     });
+};
+
+function createSelectOptions (selectElement, option) {
+    const optionElement = document.createElement('option');
+    optionElement.textContent = option;
+    selectElement.appendChild(optionElement);
 };
 
 function filterSelectors (cssClass, selectElement) {
