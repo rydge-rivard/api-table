@@ -19,12 +19,12 @@ async function loadIntoTable(url, table) {
                 if (typeof dataArrayFlat[0][1][key][nestedKey] === 'object') {
                     for (const doubleNestedKey in dataArrayFlat[0][1][key][nestedKey]) {
                         const headerElement = document.createElement('th');
-                        headerElement.textContent = `${key}_${[nestedKey]}_${doubleNestedKey}`;
+                        headerElement.textContent = `${key}_${nestedKey}_${doubleNestedKey}`;
                         tableHead.appendChild(headerElement);
                     }
                 }
                 const headerElement = document.createElement('th');
-                headerElement.textContent = `${key}_${[nestedKey]}`;
+                headerElement.textContent = `${key}_${nestedKey}`;
                 tableHead.appendChild(headerElement);
             }
         } else {
@@ -53,6 +53,8 @@ async function loadIntoTable(url, table) {
                     const cellElement = document.createElement('td');
                     cellElement.textContent = objKeyPair;
                     rowElement.appendChild(cellElement);
+                    nestedKey === 'name' && key === 'location' ? 
+                    cellElement.classList.add('location') : false ;
                 }
             } else {
                 const objKeyPair = dataArrayFlat[i][j][key];
@@ -69,5 +71,14 @@ const table = document.querySelector('table');
 
 loadIntoTable('https://7my5x8tnra.execute-api.ca-central-1.amazonaws.com/stage/product-lot', table);
 
-const locationFilter = document.querySelector('select');
-locationFilter.addEventListener('change', () => console.log(`${locationFilter.value}`));
+const locationSelect = document.querySelector('select');
+locationSelect.addEventListener('change', () => filterOnLocation());
+
+function filterOnLocation () {
+    const tr = table.querySelectorAll('tr');
+    for (let i = 0; i < tr.length; i++) {
+        console.log(tr[i]);
+        const td = tr[i].querySelector('.location');
+        console.log(td.textContent);
+    }
+};
