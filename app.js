@@ -66,7 +66,7 @@ async function loadIntoTable(url, table) {
             tableBody.appendChild(rowElement);
         }
     }
-    addPlantWeekFilter();
+    addPlantWeekOptions();
 };
 
 const table = document.querySelector('table');
@@ -79,13 +79,13 @@ locationSelect.addEventListener('change', () => filterOnLocation());
 function filterOnLocation () {
     const tr = table.querySelectorAll('tr');
     for (let i = 0; i < tr.length; i++) {
-        console.log(tr[i]);
         const td = tr[i].querySelector('.location');
-        console.log(td.textContent);
         if (locationSelect.value === 'all') {
             tr[i].style.display = "";
+            console.log(`All rows have been selected.`)
         } else if (td.textContent === locationSelect.value) {
             tr[i].style.display = "";
+            console.log(`Rows with ${td.textContent} have been selected.`)
         } else {
             tr[i].style.display = "none";
         }
@@ -96,7 +96,7 @@ function filterOnLocation () {
 //loop array and create options under select for each
 
 const plantWeekOptions = [];
-function addPlantWeekFilter () {
+function addPlantWeekOptions () {
     const plantWeekSelect = document.querySelector('#planned-plant-week');
     const tr = table.querySelectorAll('tr');
     for (let i = 0; i < tr.length; i++) {
@@ -113,4 +113,23 @@ function createSelectOptions (selectElement, option) {
     const optionElement = document.createElement('option');
     optionElement.textContent = option;
     selectElement.appendChild(optionElement);
+};
+
+const plantWeekSelect = document.querySelector('#planned-plant-week');
+plantWeekSelect.addEventListener('change', () => filterOnPlantWeek());
+
+function filterOnPlantWeek () {
+    const tr = table.querySelectorAll('tr');
+    for (let i = 0; i < tr.length; i++) {
+        const td = tr[i].querySelector('.plant-week');
+        if (plantWeekSelect.value === 'all') {
+            tr[i].style.display = "";
+            console.log(`All rows have been selected.`)
+        } else if (td.textContent === plantWeekSelect.value) {
+            tr[i].style.display = "";
+            console.log(`Rows with ${td.textContent} have been selected.`)
+        } else {
+            tr[i].style.display = "none";
+        }
+    }
 };
