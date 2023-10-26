@@ -6,8 +6,6 @@ async function loadIntoTable(url, table) {
     const dataArray = []; 
     const dataArrayFlat = [];
 
-    console.log(dataObj);
-
     for(let i in dataObj) { 
         dataArray.push([i,dataObj[i]]); 
     }; 
@@ -15,7 +13,15 @@ async function loadIntoTable(url, table) {
     dataArrayFlat.push(dataArray.flat(2));
     console.log(dataArrayFlat);
 
-    
+
+    for (let i = 0; i < dataArrayFlat.length; i++) {
+        for (let j = 0; j < dataArrayFlat[i].length; j++) {
+            console.log(dataArrayFlat[i][j])
+            const obj = dataArrayFlat[i][j];
+            console.log(obj.id);
+        }
+    }
+
 
     // data.forEach(obj => {
     //     alert(obj);
