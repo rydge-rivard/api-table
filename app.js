@@ -1,6 +1,6 @@
 const table = document.querySelector('table');
 
-loadIntoTable('https://7my5x8tnra.execute-api.ca-central-1.amazonaws.com/stage/product-lot', table);
+loadIntoTable('https://7my5x8tnra.execute-api.ca-central-1.amazonaws.com/stage/product-lot');
 
 async function loadIntoTable(url) {
     const tableHead = document.querySelector('thead');
@@ -74,6 +74,7 @@ async function loadIntoTable(url) {
     }
     getSelectorOptions ('.p-custom-code', productCustomCodeSelect);
     getSelectorOptions ('.plant-week', plantWeekSelect);
+    getSelectorOptions ('.location', locationSelect)
 };
 
 function getSelectorOptions (cssClass, selectElement) {
@@ -95,7 +96,7 @@ function createSelectOptions (selectElement, option) {
 
 const locationSelect = document.querySelector('#location');
 locationSelect.addEventListener('change', () => filterSelectors
-('.location', plantWeekSelect));
+('.location', locationSelect));
 
 const plantWeekSelect = document.querySelector('#planned-plant-week');
 plantWeekSelect.addEventListener('change', () => filterSelectors
