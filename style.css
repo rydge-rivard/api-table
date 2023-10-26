@@ -4,6 +4,11 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+h1 {
+    margin: 0;
+    padding: 12px;
+}
+
 table {
     border-collapse: collapse;
     border: 2px solid rgb(200,200,200);
@@ -34,4 +39,11 @@ table {
   
   caption {
     padding: 10px;
+  }
+
+  select {
+    padding: 6px 12px;
+    border-radius: 12px;
+    margin: 6px 0 24px 12px;
+    box-shadow: 5px 5px 10px -10px;
   }
