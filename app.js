@@ -17,7 +17,7 @@ async function loadIntoTable(url, table) {
         if (typeof dataArrayFlat[0][1][key] === 'object') {
             for (const nestedKey in dataArrayFlat[0][1][key]) {
                 const headerElement = document.createElement('th');
-                headerElement.textContent = [nestedKey];
+                headerElement.textContent = `${key}_${[nestedKey]}`;
                 tableHead.appendChild(headerElement);
             }
         } else {
