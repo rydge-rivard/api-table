@@ -80,5 +80,12 @@ function filterOnLocation () {
         console.log(tr[i]);
         const td = tr[i].querySelector('.location');
         console.log(td.textContent);
+        if (locationSelect.value === 'all') {
+            tr[i].style.display = "";
+        } else if (td.textContent === locationSelect.value) {
+            tr[i].style.display = "";
+        } else {
+            tr[i].style.display = "none";
+        }
     }
 };
