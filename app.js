@@ -1,3 +1,7 @@
+const table = document.querySelector('table');
+
+loadIntoTable('https://7my5x8tnra.execute-api.ca-central-1.amazonaws.com/stage/product-lot', table);
+
 async function loadIntoTable(url, table) {
     const tableHead = document.querySelector('thead');
     const tableBody = document.querySelector('tbody');
@@ -72,22 +76,6 @@ async function loadIntoTable(url, table) {
     getSelectorOptions ('.plant-week', plantWeekSelect);
 };
 
-const table = document.querySelector('table');
-
-loadIntoTable('https://7my5x8tnra.execute-api.ca-central-1.amazonaws.com/stage/product-lot', table);
-
-const locationSelect = document.querySelector('#location');
-locationSelect.addEventListener('change', () => filterSelectors
-('.location', plantWeekSelect));
-
-const plantWeekSelect = document.querySelector('#planned-plant-week');
-plantWeekSelect.addEventListener('change', () => filterSelectors
-('.plant-week', plantWeekSelect));
-
-const productCustomCodeSelect = document.querySelector('#product-custom-code');
-productCustomCodeSelect.addEventListener('change', () => filterSelectors
-('.p-custom-code', productCustomCodeSelect));
-
 function getSelectorOptions (cssClass, selectElement) {
     const tr = table.querySelectorAll('tr');
     let optionsArray = [];
@@ -104,6 +92,18 @@ function createSelectOptions (selectElement, option) {
     optionElement.textContent = option;
     selectElement.appendChild(optionElement);
 };
+
+const locationSelect = document.querySelector('#location');
+locationSelect.addEventListener('change', () => filterSelectors
+('.location', plantWeekSelect));
+
+const plantWeekSelect = document.querySelector('#planned-plant-week');
+plantWeekSelect.addEventListener('change', () => filterSelectors
+('.plant-week', plantWeekSelect));
+
+const productCustomCodeSelect = document.querySelector('#product-custom-code');
+productCustomCodeSelect.addEventListener('change', () => filterSelectors
+('.p-custom-code', productCustomCodeSelect));
 
 function filterSelectors (cssClass, selectElement) {
     const tr = table.querySelectorAll('tr');
