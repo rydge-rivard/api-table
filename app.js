@@ -2,7 +2,7 @@ const table = document.querySelector('table');
 
 loadIntoTable('https://7my5x8tnra.execute-api.ca-central-1.amazonaws.com/stage/product-lot', table);
 
-async function loadIntoTable(url, table) {
+async function loadIntoTable(url) {
     const tableHead = document.querySelector('thead');
     const tableBody = document.querySelector('tbody');
     const response = await fetch(url);
