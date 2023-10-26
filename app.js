@@ -1,6 +1,6 @@
 async function loadIntoTable(url, table) {
-    const tableHead = table.querySelector('thead');
-    const tableBody = table.querySelector('tbody');
+    const tableHead = document.querySelector('thead');
+    const tableBody = document.querySelector('tbody');
     const response = await fetch(url);
     const dataObj = await response.json();
     const dataArray = []; 
@@ -13,25 +13,51 @@ async function loadIntoTable(url, table) {
     dataArrayFlat.push(dataArray.flat(2));
     console.log(dataArrayFlat);
 
-
-    for (let i = 0; i < dataArrayFlat.length; i++) {
-        for (let j = 0; j < dataArrayFlat[i].length; j++) {
-            console.log(dataArrayFlat[i][j])
-            const obj = dataArrayFlat[i][j];
-            console.log(obj.id);
+    for (const key in dataArrayFlat[0][1]) {
+        if (Object.hasOwnProperty.call(dataArrayFlat[0][1], key)) {
+            const objKeyPair = dataArrayFlat[0][1][key];
+            const headerElement = document.createElement('th');
+            headerElement.textContent = [key];
+            tableHead.appendChild(headerElement);
         }
     }
 
+    // for (let j = 1, i = 0; j < dataArrayFlat[i].length; j++) {
+    //     console.log(dataArrayFlat[i][j])
+    //     const obj = dataArrayFlat[i][j];
+    //     console.log(obj.planned_plant_week);
+    //     for (const key in dataArrayFlat[i][j]) {
+    //         if (Object.hasOwnProperty.call(dataArrayFlat[i][j], key)) {
+    //             const objKeyPair = dataArrayFlat[i][j][key];
+    //             const rowElement = document.createElement('tr');
+    //             const cellElement = document.createElement('td');
+    //             cellElement.textContent = objKeyPair;
+    //             rowElement.appendChild(cellElement);
+    //             tableBody.appendChild(rowElement);
+                
+    //         }
+    //     }
+    // }
 
-    // data.forEach(obj => {
-    //     alert(obj);
-    //     // const rowElement = document.createElement('tr');
-    //     // const cellElement = document.createElement('td');
-    //     // cellElement.textContent = obj;
-    //     // rowElement.appendChild(cellElement);
-    //     // tableBody.appendChild(rowElement);
-    // });
 
+    // for (let i = 0; i < dataArrayFlat.length; i++) {
+    //     for (let j = 1; j < dataArrayFlat[i].length; j++) {
+    //         console.log(dataArrayFlat[i][j])
+    //         const obj = dataArrayFlat[i][j];
+    //         console.log(obj.planned_plant_week);
+    //         for (const key in dataArrayFlat[i][j]) {
+    //             if (Object.hasOwnProperty.call(dataArrayFlat[i][j], key)) {
+    //                 const objKeyPair = dataArrayFlat[i][j][key];
+    //                 const rowElement = document.createElement('tr');
+    //                 const cellElement = document.createElement('td');
+    //                 cellElement.textContent = objKeyPair;
+    //                 rowElement.appendChild(cellElement);
+    //                 tableBody.appendChild(rowElement);
+                    
+    //             }
+    //         }
+    //     }
+    // }
 };
 
 const table = document.querySelector('table');
