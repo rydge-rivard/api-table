@@ -68,3 +68,6 @@ async function loadIntoTable(url, table) {
 const table = document.querySelector('table');
 
 loadIntoTable('https://7my5x8tnra.execute-api.ca-central-1.amazonaws.com/stage/product-lot', table);
+
+const locationFilter = document.querySelector('select');
+locationFilter.addEventListener('change', () => console.log(`${locationFilter.value}`));
