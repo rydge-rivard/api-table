@@ -68,8 +68,8 @@ async function loadIntoTable(url, table) {
             tableBody.appendChild(rowElement);
         }
     }
-    getSelectorOptions ('.p-custom-code', productCustomCodeSelect, pCustomCodeOptions);
-    getSelectorOptions ('.plant-week', plantWeekSelect, plantWeekOptions);
+    getSelectorOptions ('.p-custom-code', productCustomCodeSelect);
+    getSelectorOptions ('.plant-week', plantWeekSelect);
 };
 
 const table = document.querySelector('table');
@@ -88,8 +88,9 @@ const productCustomCodeSelect = document.querySelector('#product-custom-code');
 productCustomCodeSelect.addEventListener('change', () => filterSelectors
 ('.p-custom-code', productCustomCodeSelect));
 
-function getSelectorOptions (cssClass, selectElement, optionsArray) {
+function getSelectorOptions (cssClass, selectElement) {
     const tr = table.querySelectorAll('tr');
+    let optionsArray = [];
     for (let i = 0; i < tr.length; i++) {
         const td = tr[i].querySelector(cssClass);
         optionsArray.push(td.textContent);
