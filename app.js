@@ -55,6 +55,8 @@ async function loadIntoTable(url, table) {
                     rowElement.appendChild(cellElement);
                     nestedKey === 'name' && key === 'location' ? 
                     cellElement.classList.add('location') : false ;
+                    nestedKey === 'custom_code' && key === 'product' ? 
+                    cellElement.classList.add('p-custom-code') : false ;
                 }
             } else {
                 const objKeyPair = dataArrayFlat[i][j][key];
