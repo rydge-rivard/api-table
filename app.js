@@ -66,6 +66,7 @@ async function loadIntoTable(url, table) {
             tableBody.appendChild(rowElement);
         }
     }
+    addPlantWeekFilter();
 };
 
 const table = document.querySelector('table');
@@ -94,10 +95,22 @@ function filterOnLocation () {
 //get array of possible values
 //loop array and create options under select for each
 
+const plantWeekOptions = [];
 function addPlantWeekFilter () {
     const plantWeekSelect = document.querySelector('#planned-plant-week');
     const tr = table.querySelectorAll('tr');
     for (let i = 0; i < tr.length; i++) {
-        
+        const td = tr[i].querySelector('.plant-week');
+        plantWeekOptions.push(td.textContent);
     }
-}
+    let uniquePlantWeekOptions = plantWeekOptions.filter((item, i, ar) => ar.indexOf(item) === i);
+    uniquePlantWeekOptions.forEach(option => {
+        createSelectOptions(plantWeekSelect, option);
+    });
+};
+
+function createSelectOptions (selectElement, option) {
+    const optionElement = document.createElement('option');
+    optionElement.textContent = option;
+    selectElement.appendChild(optionElement);
+};
