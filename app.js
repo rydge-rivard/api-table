@@ -16,6 +16,13 @@ async function loadIntoTable(url, table) {
     for (const key in dataArrayFlat[0][1]) {
         if (typeof dataArrayFlat[0][1][key] === 'object') {
             for (const nestedKey in dataArrayFlat[0][1][key]) {
+                if (typeof dataArrayFlat[0][1][key][nestedKey] === 'object') {
+                    for (const doubleNestedKey in dataArrayFlat[0][1][key][nestedKey]) {
+                        const headerElement = document.createElement('th');
+                        headerElement.textContent = `${key}_${[nestedKey]}_${doubleNestedKey}`;
+                        tableHead.appendChild(headerElement);
+                    }
+                }
                 const headerElement = document.createElement('th');
                 headerElement.textContent = `${key}_${[nestedKey]}`;
                 tableHead.appendChild(headerElement);
