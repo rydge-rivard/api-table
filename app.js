@@ -68,7 +68,8 @@ async function loadIntoTable(url, table) {
             tableBody.appendChild(rowElement);
         }
     }
-    addPlantWeekOptions();
+    addPlantWeekOptions ();
+    addPCustomCodeOptions ();
 };
 
 const table = document.querySelector('table');
@@ -134,4 +135,18 @@ function filterOnPlantWeek () {
             tr[i].style.display = "none";
         }
     }
+};
+
+const pCustomCodeOptions = [];
+function addPCustomCodeOptions () {
+    const productCustomCodeSelect = document.querySelector('#product-custom-code');
+    const tr = table.querySelectorAll('tr');
+    for (let i = 0; i < tr.length; i++) {
+        const td = tr[i].querySelector('.p-custom-code');
+        pCustomCodeOptions.push(td.textContent);
+    }
+    let uniquePCustomCodeOptions = pCustomCodeOptions.filter((item, i, ar) => ar.indexOf(item) === i);
+    uniquePCustomCodeOptions.forEach(option => {
+        createSelectOptions(productCustomCodeSelect, option);
+    });
 };
