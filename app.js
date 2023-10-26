@@ -121,3 +121,17 @@ function filterSelectors (cssClass, selectElement) {
         }
     }
 };
+
+const btn = document.querySelector('.reset');
+btn.addEventListener('click', resetFilters);
+
+function resetFilters () {
+    const tr = table.querySelectorAll('tr');
+    for (let i = 0; i < tr.length; i++) {
+        tr[i].style.display = "";
+    }
+    locationSelect.value = 'all';
+    productCustomCodeSelect.value = 'all';
+    plantWeekSelect.value = 'all';
+    console.log(`Filters have been reset.`)
+};

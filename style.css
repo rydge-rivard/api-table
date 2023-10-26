@@ -48,3 +48,17 @@ table {
     border-radius: 12px;
     margin: 6px 0 24px 12px;
   }
+
+  .reset:hover {
+    background-color: #ef4444;
+    cursor: pointer;
+  }
+
+  .reset {
+    background-color: #df1f1f;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-weight: 700;
+  }
