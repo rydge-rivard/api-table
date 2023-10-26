@@ -33,7 +33,14 @@ async function loadIntoTable(url, table) {
 
         const rowElement = document.createElement('tr');
         for (const key in dataArrayFlat[i][j]) {
-            if (Object.hasOwnProperty.call(dataArrayFlat[i][j], key)) {
+            if (typeof dataArrayFlat[i][j][key] === 'object') {
+                for (const nestedKey in dataArrayFlat[i][j][key]) {
+                    const objKeyPair = dataArrayFlat[i][j][key][nestedKey];
+                    const cellElement = document.createElement('td');
+                    cellElement.textContent = objKeyPair;
+                    rowElement.appendChild(cellElement);
+                }
+            } else {
                 const objKeyPair = dataArrayFlat[i][j][key];
                 const cellElement = document.createElement('td');
                 cellElement.textContent = objKeyPair;
