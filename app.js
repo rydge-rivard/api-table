@@ -59,6 +59,7 @@ async function loadIntoTable(url, table) {
             } else {
                 const objKeyPair = dataArrayFlat[i][j][key];
                 const cellElement = document.createElement('td');
+                key === 'planned_plant_week' ? cellElement.classList.add('plant-week') : false ;
                 cellElement.textContent = objKeyPair;
                 rowElement.appendChild(cellElement); 
             }
@@ -71,7 +72,7 @@ const table = document.querySelector('table');
 
 loadIntoTable('https://7my5x8tnra.execute-api.ca-central-1.amazonaws.com/stage/product-lot', table);
 
-const locationSelect = document.querySelector('select');
+const locationSelect = document.querySelector('#location');
 locationSelect.addEventListener('change', () => filterOnLocation());
 
 function filterOnLocation () {
@@ -89,3 +90,14 @@ function filterOnLocation () {
         }
     }
 };
+
+//get array of possible values
+//loop array and create options under select for each
+
+function addPlantWeekFilter () {
+    const plantWeekSelect = document.querySelector('#planned-plant-week');
+    const tr = table.querySelectorAll('tr');
+    for (let i = 0; i < tr.length; i++) {
+        
+    }
+}
