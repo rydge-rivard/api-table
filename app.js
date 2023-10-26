@@ -77,26 +77,11 @@ const table = document.querySelector('table');
 loadIntoTable('https://7my5x8tnra.execute-api.ca-central-1.amazonaws.com/stage/product-lot', table);
 
 const locationSelect = document.querySelector('#location');
-locationSelect.addEventListener('change', () => filterOnLocation());
+locationSelect.addEventListener('change', () => filterSelectors
+('.location', plantWeekSelect));
 
-function filterOnLocation () {
-    const tr = table.querySelectorAll('tr');
-    for (let i = 0; i < tr.length; i++) {
-        const td = tr[i].querySelector('.location');
-        if (locationSelect.value === 'all') {
-            tr[i].style.display = "";
-            console.log(`All rows have been selected.`)
-        } else if (td.textContent === locationSelect.value) {
-            tr[i].style.display = "";
-            console.log(`Rows with ${td.textContent} have been selected.`)
-        } else {
-            tr[i].style.display = "none";
-        }
-    }
-};
-
-//get array of possible values
-//loop array and create options under select for each
+//location selector options were created manually as an initial test of filtering
+//will update to dynamic function once the rest of logic is completed
 
 const plantWeekOptions = [];
 function addPlantWeekOptions () {
@@ -119,26 +104,12 @@ function createSelectOptions (selectElement, option) {
 };
 
 const plantWeekSelect = document.querySelector('#planned-plant-week');
-plantWeekSelect.addEventListener('change', () => filterOnPlantWeek());
-
-function filterOnPlantWeek () {
-    const tr = table.querySelectorAll('tr');
-    for (let i = 0; i < tr.length; i++) {
-        const td = tr[i].querySelector('.plant-week');
-        if (plantWeekSelect.value === 'all') {
-            tr[i].style.display = "";
-            console.log(`All rows have been selected.`)
-        } else if (td.textContent === plantWeekSelect.value) {
-            tr[i].style.display = "";
-            console.log(`Rows with ${td.textContent} have been selected.`)
-        } else {
-            tr[i].style.display = "none";
-        }
-    }
-};
+plantWeekSelect.addEventListener('change', () => filterSelectors
+('.plant-week', plantWeekSelect));
 
 const productCustomCodeSelect = document.querySelector('#product-custom-code');
-productCustomCodeSelect.addEventListener('change', () => filterOnProductCustomCode());
+productCustomCodeSelect.addEventListener('change', () => filterSelectors
+('.p-custom-code', productCustomCodeSelect));
 
 const pCustomCodeOptions = [];
 function addPCustomCodeOptions () {
@@ -154,14 +125,14 @@ function addPCustomCodeOptions () {
     });
 };
 
-function filterOnProductCustomCode () {
+function filterSelectors (cssClass, selectElement) {
     const tr = table.querySelectorAll('tr');
     for (let i = 0; i < tr.length; i++) {
-        const td = tr[i].querySelector('.p-custom-code');
-        if (productCustomCodeSelect.value === 'all') {
+        const td = tr[i].querySelector(cssClass);
+        if (selectElement.value === 'all') {
             tr[i].style.display = "";
             console.log(`All rows have been selected.`)
-        } else if (td.textContent === productCustomCodeSelect.value) {
+        } else if (td.textContent === selectElement.value) {
             tr[i].style.display = "";
             console.log(`Rows with ${td.textContent} have been selected.`)
         } else {
