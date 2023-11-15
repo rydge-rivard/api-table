@@ -93,15 +93,16 @@ function resetFilters() {
   console.log(`Filters have been reset.`);
 }
 
-function getHeaders(obj, headers = []) {
+function getHeaders(obj, headers = [], parent = "") {
   for (const key in obj) {
     if (typeof obj[key] !== "object") {
-      headers.push(key);
+      headers.push(`${parent}${key}`);
     }
   }
   for (const key in obj) {
     if (typeof obj[key] === "object") {
-      getHeaders(obj[key], headers);
+      const parent = `${key}_`;
+      getHeaders(obj[key], headers, parent);
     }
   }
   return headers;
