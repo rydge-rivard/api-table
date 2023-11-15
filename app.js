@@ -24,9 +24,9 @@ async function loadIntoTable(url) {
   printHeaders(headers, tableHead);
   printRows(dataArrayFlat[0], tableBody);
 
-  getSelectorOptions(".p-custom-code", productCustomCodeSelect);
-  getSelectorOptions(".plant-week", plantWeekSelect);
-  getSelectorOptions(".location", locationSelect);
+  getSelectorOptions(".product_custom_code", productCustomCodeSelect);
+  getSelectorOptions(".planned_plant_week", plantWeekSelect);
+  getSelectorOptions(".location_name", locationSelect);
 }
 
 function getSelectorOptions(cssClass, selectElement) {
@@ -50,17 +50,17 @@ function createSelectOptions(selectElement, option) {
 
 const locationSelect = document.querySelector("#location");
 locationSelect.addEventListener("change", () =>
-  filterSelectors(".location", locationSelect)
+  filterSelectors(".location_name", locationSelect)
 );
 
 const plantWeekSelect = document.querySelector("#planned-plant-week");
 plantWeekSelect.addEventListener("change", () =>
-  filterSelectors(".plant-week", plantWeekSelect)
+  filterSelectors(".planned_plant_week", plantWeekSelect)
 );
 
 const productCustomCodeSelect = document.querySelector("#product-custom-code");
 productCustomCodeSelect.addEventListener("change", () =>
-  filterSelectors(".p-custom-code", productCustomCodeSelect)
+  filterSelectors(".product_custom_code", productCustomCodeSelect)
 );
 
 function filterSelectors(cssClass, selectElement) {
@@ -134,11 +134,15 @@ function printRows(data, tableBody) {
   for (let i = 1; i < data.length; i++) {
     const rowElement = document.createElement("tr");
     const row = getRows(data[i]);
-    row.forEach((cell) => {
+    for (let i = 0; i < row.length; i++) {
+      const cell = row[i];
       const cellElement = document.createElement("td");
+      i === 13 ? cellElement.classList.add("location_name") : false;
+      i === 6 ? cellElement.classList.add("product_custom_code") : false;
+      i === 2 ? cellElement.classList.add("planned_plant_week") : false;
       cellElement.textContent = cell;
       rowElement.appendChild(cellElement);
       tableBody.appendChild(rowElement);
-    });
+    }
   }
 }
