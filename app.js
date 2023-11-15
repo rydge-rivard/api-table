@@ -19,72 +19,11 @@ async function loadIntoTable(url) {
   dataArrayFlat.push(dataArray.flat(2));
   console.log(dataArrayFlat);
   console.log(dataArrayFlat[0][1]);
+
   const headers = getHeaders(dataArrayFlat[0][1]);
   printHeaders(headers, tableHead);
-  console.log("top level const for print: " + headers);
-  console.log(getRows(dataArrayFlat[0][1]));
-  console.log(printRows(dataArrayFlat[0], tableBody));
+  printRows(dataArrayFlat[0], tableBody);
 
-  //   for (const key in dataArrayFlat[0][1]) {
-  //     if (typeof dataArrayFlat[0][1][key] === "object") {
-  //       for (const nestedKey in dataArrayFlat[0][1][key]) {
-  //         if (typeof dataArrayFlat[0][1][key][nestedKey] === "object") {
-  //           for (const doubleNestedKey in dataArrayFlat[0][1][key][nestedKey]) {
-  //             const headerElement = document.createElement("th");
-  //             headerElement.textContent = `${key}_${nestedKey}_${doubleNestedKey}`;
-  //             tableHead.appendChild(headerElement);
-  //           }
-  //         }
-  //         const headerElement = document.createElement("th");
-  //         headerElement.textContent = `${key}_${nestedKey}`;
-  //         tableHead.appendChild(headerElement);
-  //       }
-  //     } else {
-  //       const headerElement = document.createElement("th");
-  //       headerElement.textContent = [key];
-  //       tableHead.appendChild(headerElement);
-  //     }
-  //   }
-
-  //   for (let j = 1, i = 0; j < dataArrayFlat[i].length; j++) {
-  //     const obj = dataArrayFlat[i][j];
-
-  //     const rowElement = document.createElement("tr");
-  //     for (const key in dataArrayFlat[i][j]) {
-  //       if (typeof dataArrayFlat[i][j][key] === "object") {
-  //         for (const nestedKey in dataArrayFlat[i][j][key]) {
-  //           if (typeof dataArrayFlat[i][j][key][nestedKey] === "object") {
-  //             for (const doubleNestedKey in dataArrayFlat[i][j][key][nestedKey]) {
-  //               const objKeyPair =
-  //                 dataArrayFlat[i][j][key][nestedKey][doubleNestedKey];
-  //               const cellElement = document.createElement("td");
-  //               cellElement.textContent = objKeyPair;
-  //               rowElement.appendChild(cellElement);
-  //             }
-  //           }
-  //           const objKeyPair = dataArrayFlat[i][j][key][nestedKey];
-  //           const cellElement = document.createElement("td");
-  //           cellElement.textContent = objKeyPair;
-  //           rowElement.appendChild(cellElement);
-  //           nestedKey === "name" && key === "location"
-  //             ? cellElement.classList.add("location")
-  //             : false;
-  //           nestedKey === "custom_code" && key === "product"
-  //             ? cellElement.classList.add("p-custom-code")
-  //             : false;
-  //         }
-  //       } else {
-  //         const objKeyPair = dataArrayFlat[i][j][key];
-  //         const cellElement = document.createElement("td");
-  //         key === "planned_plant_week"
-  //           ? cellElement.classList.add("plant-week")
-  //           : false;
-  //         cellElement.textContent = objKeyPair;
-  //         rowElement.appendChild(cellElement);
-  //       }
-  //       tableBody.appendChild(rowElement);
-  //     }
-  //   }
   getSelectorOptions(".p-custom-code", productCustomCodeSelect);
   getSelectorOptions(".plant-week", plantWeekSelect);
   getSelectorOptions(".location", locationSelect);
