@@ -46,45 +46,45 @@ async function loadIntoTable(url) {
   //     }
   //   }
 
-  for (let j = 1, i = 0; j < dataArrayFlat[i].length; j++) {
-    const obj = dataArrayFlat[i][j];
+  //   for (let j = 1, i = 0; j < dataArrayFlat[i].length; j++) {
+  //     const obj = dataArrayFlat[i][j];
 
-    const rowElement = document.createElement("tr");
-    for (const key in dataArrayFlat[i][j]) {
-      if (typeof dataArrayFlat[i][j][key] === "object") {
-        for (const nestedKey in dataArrayFlat[i][j][key]) {
-          if (typeof dataArrayFlat[i][j][key][nestedKey] === "object") {
-            for (const doubleNestedKey in dataArrayFlat[i][j][key][nestedKey]) {
-              const objKeyPair =
-                dataArrayFlat[i][j][key][nestedKey][doubleNestedKey];
-              const cellElement = document.createElement("td");
-              cellElement.textContent = objKeyPair;
-              rowElement.appendChild(cellElement);
-            }
-          }
-          const objKeyPair = dataArrayFlat[i][j][key][nestedKey];
-          const cellElement = document.createElement("td");
-          cellElement.textContent = objKeyPair;
-          rowElement.appendChild(cellElement);
-          nestedKey === "name" && key === "location"
-            ? cellElement.classList.add("location")
-            : false;
-          nestedKey === "custom_code" && key === "product"
-            ? cellElement.classList.add("p-custom-code")
-            : false;
-        }
-      } else {
-        const objKeyPair = dataArrayFlat[i][j][key];
-        const cellElement = document.createElement("td");
-        key === "planned_plant_week"
-          ? cellElement.classList.add("plant-week")
-          : false;
-        cellElement.textContent = objKeyPair;
-        rowElement.appendChild(cellElement);
-      }
-      tableBody.appendChild(rowElement);
-    }
-  }
+  //     const rowElement = document.createElement("tr");
+  //     for (const key in dataArrayFlat[i][j]) {
+  //       if (typeof dataArrayFlat[i][j][key] === "object") {
+  //         for (const nestedKey in dataArrayFlat[i][j][key]) {
+  //           if (typeof dataArrayFlat[i][j][key][nestedKey] === "object") {
+  //             for (const doubleNestedKey in dataArrayFlat[i][j][key][nestedKey]) {
+  //               const objKeyPair =
+  //                 dataArrayFlat[i][j][key][nestedKey][doubleNestedKey];
+  //               const cellElement = document.createElement("td");
+  //               cellElement.textContent = objKeyPair;
+  //               rowElement.appendChild(cellElement);
+  //             }
+  //           }
+  //           const objKeyPair = dataArrayFlat[i][j][key][nestedKey];
+  //           const cellElement = document.createElement("td");
+  //           cellElement.textContent = objKeyPair;
+  //           rowElement.appendChild(cellElement);
+  //           nestedKey === "name" && key === "location"
+  //             ? cellElement.classList.add("location")
+  //             : false;
+  //           nestedKey === "custom_code" && key === "product"
+  //             ? cellElement.classList.add("p-custom-code")
+  //             : false;
+  //         }
+  //       } else {
+  //         const objKeyPair = dataArrayFlat[i][j][key];
+  //         const cellElement = document.createElement("td");
+  //         key === "planned_plant_week"
+  //           ? cellElement.classList.add("plant-week")
+  //           : false;
+  //         cellElement.textContent = objKeyPair;
+  //         rowElement.appendChild(cellElement);
+  //       }
+  //       tableBody.appendChild(rowElement);
+  //     }
+  //   }
   getSelectorOptions(".p-custom-code", productCustomCodeSelect);
   getSelectorOptions(".plant-week", plantWeekSelect);
   getSelectorOptions(".location", locationSelect);
@@ -191,56 +191,14 @@ function getRows(obj, row = []) {
 }
 
 function printRows(data, tableBody) {
-  data.forEach((obj) => {
+  for (let i = 1; i < data.length; i++) {
     const rowElement = document.createElement("tr");
-    const row = getRows(obj);
+    const row = getRows(data[i]);
     row.forEach((cell) => {
       const cellElement = document.createElement("td");
       cellElement.textContent = cell;
       rowElement.appendChild(cellElement);
       tableBody.appendChild(rowElement);
     });
-  });
+  }
 }
-
-// collect row data
-// for each data point, print a cell
-
-// for (let j = 1, i = 0; j < dataArrayFlat[i].length; j++) {
-//   const obj = dataArrayFlat[i][j];
-
-//   for (const key in dataArrayFlat[i][j]) {
-//     if (typeof dataArrayFlat[i][j][key] === "object") {
-//       for (const nestedKey in dataArrayFlat[i][j][key]) {
-//         if (typeof dataArrayFlat[i][j][key][nestedKey] === "object") {
-//           for (const doubleNestedKey in dataArrayFlat[i][j][key][nestedKey]) {
-//             const objKeyPair =
-//               dataArrayFlat[i][j][key][nestedKey][doubleNestedKey];
-//             const cellElement = document.createElement("td");
-//             cellElement.textContent = objKeyPair;
-//             rowElement.appendChild(cellElement);
-//           }
-//         }
-//         const objKeyPair = dataArrayFlat[i][j][key][nestedKey];
-//         const cellElement = document.createElement("td");
-//         cellElement.textContent = objKeyPair;
-//         rowElement.appendChild(cellElement);
-//         nestedKey === "name" && key === "location"
-//           ? cellElement.classList.add("location")
-//           : false;
-//         nestedKey === "custom_code" && key === "product"
-//           ? cellElement.classList.add("p-custom-code")
-//           : false;
-//       }
-//     } else {
-//       const objKeyPair = dataArrayFlat[i][j][key];
-//       const cellElement = document.createElement("td");
-//       key === "planned_plant_week"
-//         ? cellElement.classList.add("plant-week")
-//         : false;
-//       cellElement.textContent = objKeyPair;
-//       rowElement.appendChild(cellElement);
-//     }
-//     tableBody.appendChild(rowElement);
-//   }
-// }
