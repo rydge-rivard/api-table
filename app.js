@@ -97,10 +97,7 @@ function getHeaders(obj, headers = [], parent = "") {
   for (const key in obj) {
     if (typeof obj[key] !== "object") {
       headers.push(`${parent}${key}`);
-    }
-  }
-  for (const key in obj) {
-    if (typeof obj[key] === "object") {
+    } else {
       const parent = `${key}_`;
       getHeaders(obj[key], headers, parent);
     }
@@ -120,10 +117,7 @@ function getRows(obj, row = []) {
   for (const key in obj) {
     if (typeof obj[key] !== "object") {
       row.push(obj[key]);
-    }
-  }
-  for (const key in obj) {
-    if (typeof obj[key] === "object") {
+    } else {
       getRows(obj[key], row);
     }
   }
@@ -138,8 +132,8 @@ function printRows(data, tableBody) {
       const cell = row[i];
       const cellElement = document.createElement("td");
       i === 13 ? cellElement.classList.add("location_name") : false;
-      i === 6 ? cellElement.classList.add("product_custom_code") : false;
-      i === 2 ? cellElement.classList.add("planned_plant_week") : false;
+      i === 3 ? cellElement.classList.add("product_custom_code") : false;
+      i === 10 ? cellElement.classList.add("planned_plant_week") : false;
       cellElement.textContent = cell;
       rowElement.appendChild(cellElement);
       tableBody.appendChild(rowElement);
